@@ -15,6 +15,9 @@ gem 'grape-entity'
 gem 'grape-swagger-entity'
 gem 'grape-swagger'
 gem 'grape-swagger-rails'
+gem 'grape_devise_token_auth'
+gem 'rack-cors'
+
 
 # Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks
 gem 'turbolinks', '~> 5'
