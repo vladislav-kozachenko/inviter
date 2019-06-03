@@ -8,5 +8,6 @@ module V1
     format :json
 
     mount V1::Registrations
+    mount V1::Sessions
   end
 end

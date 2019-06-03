@@ -5,11 +5,15 @@ class Session < ApplicationRecord
   validates_uniqueness_of :token
   before_validation :ensure_token
 
+  def extend_expiration
+    self.expiration = Time.current + 1.month
+  end
+
   private
 
   def ensure_token
     self.token = generate_token
-    self.expiration = Time.current+1.month
+    extend_expiration
   end
 
   def generate_token
