@@ -9,5 +9,6 @@ module V1
 
     mount V1::Registrations
     mount V1::Sessions
+    mount V1::Projects
   end
 end

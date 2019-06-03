@@ -1,8 +1,8 @@
 class CreateLocationProject < ActiveRecord::Migration[5.2]
   def change
-    create_table :location_projects do |t|
-      t.integer :project_id
-      t.integer :location_id
+    create_table :locations_projects do |t|
+      t.references :project, index: true
+      t.references :location, index: true
     end
   end
 end

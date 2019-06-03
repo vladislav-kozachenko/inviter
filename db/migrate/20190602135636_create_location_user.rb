@@ -1,8 +1,8 @@
 class CreateLocationUser < ActiveRecord::Migration[5.2]
   def change
-    create_table :location_users do |t|
-      t.integer :user_id
-      t.integer :location_id
+    create_table :locations_users do |t|
+      t.references :user, index: true
+      t.references :location, index: true
     end
   end
 end
