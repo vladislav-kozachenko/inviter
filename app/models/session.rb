@@ -1,14 +1,15 @@
 class Session < ApplicationRecord
   belongs_to :user
 
-  validates_presence_of :user, :token
+  validates_presence_of :user, :token, :expiration
   validates_uniqueness_of :token
-  before_save :ensure_token
+  before_validation :ensure_token
 
   private
 
   def ensure_token
     self.token = generate_token
+    self.expiration = Time.current+1.month
   end
 
   def generate_token
