@@ -11,6 +11,7 @@ module V1
       end
       post do
         user = User.create!(email: params[:email], password: params[:password])
+        Session.create!(user: user)
         present user, with: V1::Entities::Registrations
       end
     end
