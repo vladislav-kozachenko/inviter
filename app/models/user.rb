@@ -7,5 +7,5 @@ class User < ApplicationRecord
   has_and_belongs_to_many :locations
   has_many :sessions
 
-  belongs_to :invited_by, polymorphic: true
+  belongs_to :invited_by, polymorphic: true, optional: true
 end

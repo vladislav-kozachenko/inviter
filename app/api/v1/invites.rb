@@ -9,7 +9,7 @@ module V1
       end
       params do
         requires :email, type: String, allow_blank: false, desc: 'Email'
-        requires :project_id, type: Integer, allow_blank: false, desc: 'Password'
+        requires :project_id, type: Integer, allow_blank: false, desc: 'Project ID'
         requires :user_role, type: Integer, allow_blank: false, desc: 'Role'
       end
       post do
@@ -21,6 +21,24 @@ module V1
         else
           error!('Forbidden', 401)
         end
+      end
+    end
+
+    resources :accept_invitation do
+      desc 'Accept Invitation' do
+        success V1::Entities::Registrations
+      end
+      params do
+        requires :invitation_token, type: String, allow_blank: false, desc: 'Invitation Token'
+        requires :password, type: String, allow_blank: false, desc: 'Password'
+        requires :password_confirmation, type: String, allow_blank: false, desc: 'Password Confirmation'
+      end
+      post do
+        user = User.find_by(invitation_token: params[:invitation_token])
+        user.accept_invitation!
+        user.update(declared(params).except(:invitation_token))
+        Session.create!(user: user)
+        present user, with: V1::Entities::Registrations
       end
     end
   end
