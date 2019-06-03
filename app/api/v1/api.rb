@@ -11,5 +11,6 @@ module V1
     mount V1::Sessions
     mount V1::Projects
     mount V1::ProjectUsers
+    mount V1::Invites
   end
 end
