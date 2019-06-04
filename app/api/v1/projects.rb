@@ -50,6 +50,7 @@ module V1
       end
       delete do
         project = current_user.projects.find_by(id: params[:id])
+        error!('Forbidden', 403) if project.blank?
         project.destroy!
         present status, with: V1::Entities::NoContent
       end
