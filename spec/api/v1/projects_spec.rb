@@ -1,9 +1,5 @@
 require 'rails_helper'
 
-def authenticate(credentials)
-  post '/api/v1/sessions', params: credentials
-end
-
 RSpec.describe 'projects', type: :request do
   let(:user) { create(:user_registration) }
   let(:session) { Session.create(user: user) }

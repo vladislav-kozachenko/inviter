@@ -24,7 +24,8 @@ module V1
         requires :user_role, type: Integer, allow_blank: false, desc: 'Role'
       end
       post do
-        project = current_user.project_users.find_by(user_role: 0, project_id: params[:project_id])
+        project = current_user.project_users.find_by(user_role: 0, project_id: params[:project_id]).try(:project)
+        error!('Forbidden', 403) if project.blank?
         project_user = ProjectUser.create!(project_id: project.id, user_id: params[:user_id], user_role: params[:user_role])
         present project_user, with: V1::Entities::ProjectUsers
       end
